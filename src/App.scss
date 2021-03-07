@@ -1,0 +1,116 @@
+h1 {
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10rem;
+}
+
+.container {
+    height: stretch;
+    width: 100%;
+
+    background: #ecf0f1;
+}
+
+.horizontal-center {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    max-width: 25rem;
+}
+
+.carouser-container {
+    position: relative;
+    overflow: hidden;
+
+    .right-carousel-button {
+        right: 0;
+        transform: translate(100%, -50%);
+
+        //        visibility: ${({ hasItemsOnRight }) => (hasItemsOnRight ? `all` : `hidden`)};
+    }
+
+    &:hover .right-carousel-button {
+        transform: translate(0%, -50%);
+    }
+}
+
+.carouser-container-inner {
+    display: flex;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    // offset for children spacing
+    margin-left: -1rem;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    //   ${CarouselItem} & {
+    //     scroll-snap-align: center;
+    //   }
+}
+
+.carousel-button {
+  position: absolute;
+
+  cursor: pointer;
+
+  top: 50%;
+  z-index: 1;
+
+  transition: transform 0.1s ease-in-out;
+
+  background: white;
+  border-radius: 15px;
+  border: none;
+  padding: 0.5rem;
+}
+
+.carousel-button-left {
+    left: 0;
+    transform: translate(-100%, -50%);
+  
+    // ${CarouserContainer}:hover & {
+    //   transform: translate(0%, -50%);
+    // }
+    transform: translate(0%, -50%);
+  
+//    visibility: ${({ hasItemsOnLeft }) => (hasItemsOnLeft ? `all` : `hidden`)};
+  
+}
+
+.carousel-button-right {
+    right: 0;
+    transform: translate(100%, -50%);
+  
+    // ${CarouserContainer}:hover & {
+    //   transform: translate(0%, -50%);
+    // }
+    transform: translate(0%, -50%);
+  
+    //visibility: ${({ hasItemsOnRight }) => (hasItemsOnRight ? `all` : `hidden`)};
+}
+
+.item {
+    color: white;
+    font-size: 2rem;
+    text-transform: capitalize;
+
+    //   width: ${({ size }) => `${size}rem`};
+    //   height: ${({ size }) => `${size}rem`};
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carouse-item {
+  flex: 0 0 auto;
+
+  margin-left: 1rem;
+}
