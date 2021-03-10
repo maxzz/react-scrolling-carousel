@@ -59,7 +59,7 @@ function Item({ size, children, style = {} }: any) {
     );
 }
 
-function getPrevElement(list: any) {
+function getPrevElement(list: Element[]) {
     const sibling = list[0].previousElementSibling;
 
     if (sibling instanceof HTMLElement) {
@@ -69,11 +69,11 @@ function getPrevElement(list: any) {
     return sibling;
 }
 
-function getNextElement(list: any) {
+function getNextElement(list: Element[]) {
     const sibling = list[list.length - 1].nextElementSibling;
 
     if (sibling instanceof HTMLElement) {
-        console.log('next', sibling);
+        //console.log('next', sibling);
         
         return sibling;
     }
@@ -81,9 +81,30 @@ function getNextElement(list: any) {
     return null;
 }
 
-function usePosition(ref: React.MutableRefObject<HTMLElement | undefined>) {
-    const [prevElement, setPrevElement] = React.useState<HTMLElement | null>(null);
-    const [nextElement, setNextElement] = React.useState<HTMLElement | null>(null);
+function throttle(func: Function, limit: number) {
+    let lastFunc: number;
+    let lastRan: number;
+    return function () {
+        const context = null; // this
+        const args = arguments;
+        if (!lastRan) {
+            func.apply(context, args);
+            lastRan = Date.now();
+        } else {
+            clearTimeout(lastFunc);
+            lastFunc = setTimeout(function () {
+                if (Date.now() - lastRan >= limit) {
+                    func.apply(context, args);
+                    lastRan = Date.now();
+                }
+            }, limit - (Date.now() - lastRan));
+        }
+    };
+}
+
+function usePosition(ref: React.MutableRefObject<Element | undefined>) {
+    const [prevElement, setPrevElement] = React.useState<Element | null>(null);
+    const [nextElement, setNextElement] = React.useState<Element | null>(null);
 
     React.useEffect(() => {
         const element = ref.current;
@@ -97,19 +118,22 @@ function usePosition(ref: React.MutableRefObject<HTMLElement | undefined>) {
             const rect = element.getBoundingClientRect();
 
             const visibleElements = Array.from(element.children).filter((child) => {
-                const childRect = child.getBoundingClientRect();
-                return childRect.left >= rect.left && childRect.right <= rect.right;
+                const r = child.getBoundingClientRect();
+                return r.left >= rect.left && r.right <= rect.right;
             });
+
+            //console.log('visibleElements', visibleElements);
 
             if (visibleElements.length > 0) {
                 setPrevElement(getPrevElement(visibleElements));
                 setNextElement(getNextElement(visibleElements));
+                console.log('prev, next', getPrevElement(visibleElements), getNextElement(visibleElements));
             }
         };
 
         update();
 
-        element.addEventListener("scroll", update, { passive: true });
+        element.addEventListener("scroll", throttle(update, 500), { passive: true });
 
         return () => {
             element.removeEventListener("scroll", update);
@@ -338,9 +362,9 @@ function App() {
     return (
         <div className="container">
             <h1>Easy Carousel</h1>
-            <div className="horizontal-center">
+            {/* <div className="horizontal-center">
                 <Carousel>{colorsArray}</Carousel>
-            </div>
+            </div> */}
             <div className="horizontal-center">
                 <Carousel>{numbersArray}</Carousel>
             </div>

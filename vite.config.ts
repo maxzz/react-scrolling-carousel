@@ -23,6 +23,6 @@ function copyExtra() {
 export default defineConfig({
     plugins: [
         reactRefresh(),
-        copyExtra()
+        //copyExtra()
     ]
 })
