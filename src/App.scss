@@ -27,8 +27,6 @@ h1 {
     .right-carousel-button {
         right: 0;
         transform: translate(100%, -50%);
-
-        //        visibility: ${({ hasItemsOnRight }) => (hasItemsOnRight ? `all` : `hidden`)};
     }
 
     &:hover .right-carousel-button {
@@ -52,10 +50,7 @@ h1 {
 
     .carousel-item & {
         scroll-snap-align: center;
-    }
-    //   ${CarouselItem} & {
-    //     scroll-snap-align: center;
-    //   }
+    } // ${CarouselItem} & { scroll-snap-align: center; }
 }
 
 .carousel-button {
@@ -80,11 +75,9 @@ h1 {
 
     .carouser-container:hover & {
         transform: translate(0%, -50%);
-    }
-    // ${CarouserContainer}:hover & {
-    //   transform: translate(0%, -50%);
-    // }
-    transform: translate(0%, -50%);
+    } // ${CarouserContainer}:hover & { transform: translate(0%, -50%); }
+
+    //transform: translate(0%, -50%);
 }
 
 .carousel-button-right {
@@ -93,16 +86,14 @@ h1 {
 
     .carouser-container:hover & {
         transform: translate(0%, -50%);
-    }
-    // ${CarouserContainer}:hover & {
-    //   transform: translate(0%, -50%);
-    // }
-    transform: translate(0%, -50%);
+    } // ${CarouserContainer}:hover & { transform: translate(0%, -50%); }
+
+    //transform: translate(0%, -50%);
 }
 
 .item {
-    color: white;
     font-size: 2rem;
+    color: white;
     text-transform: capitalize;
 
     //   width: ${({ size }) => `${size}rem`};
@@ -114,7 +105,6 @@ h1 {
 }
 
 .carousel-item {
-  flex: 0 0 auto;
-
-  margin-left: 1rem;
+    margin-left: 1rem;
+    flex: 0 0 auto;
 }
