@@ -1,59 +1,74 @@
 h1 {
     text-align: center;
     margin: 0;
-    padding-bottom: 10rem;
+    padding: 2rem 0;
 }
 
 .container {
-    height: stretch;
     width: 100%;
-
+    height: stretch;
     background: #ecf0f1;
 }
 
 .horizontal-center {
-    display: flex;
-    justify-content: center;
     margin-left: auto;
     margin-right: auto;
-
     max-width: 25rem;
+    display: flex;
+    justify-content: center;
 }
 
-.carouser-container {
+$CarouserContainer: carouser-container;
+$CarouselItem: carousel-item;
+$CarouseButton: carousel-button;
+
+.#{$CarouserContainer} {
     position: relative;
     overflow: hidden;
 
-    .right-carousel-button {
-        right: 0;
-        transform: translate(100%, -50%);
-    }
+    // .right-carousel-button {
+    //     right: 0;
+    //     transform: translate(100%, -50%);
+    // }
 
-    &:hover .right-carousel-button {
-        transform: translate(0%, -50%);
-    }
+    // &:hover .right-carousel-button {
+    //     transform: translate(0%, -50%);
+    // }
 }
 
-.carouser-container-inner {
+.#{$CarouserContainer}-inner {
+    margin-left: -1rem; // offset for children spacing
     display: flex;
+
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     -ms-overflow-style: none;
     scrollbar-width: none;
-
-    // offset for children spacing
-    margin-left: -1rem;
-
     &::-webkit-scrollbar {
         display: none;
     }
 
-    .carousel-item & {
+    .#{$CarouselItem} & {
         scroll-snap-align: center;
     } // ${CarouselItem} & { scroll-snap-align: center; }
 }
 
-.carousel-button {
+.item {
+    font-size: 2rem;
+    color: white;
+    text-transform: capitalize;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.#{$CarouselItem} {
+    margin-left: 1rem;
+    flex: 0 0 auto;
+}
+
+.#{$CarouseButton} {
     position: absolute;
 
     cursor: pointer;
@@ -69,42 +84,20 @@ h1 {
     padding: 0.5rem;
 }
 
-.carousel-button-left {
+.#{$CarouseButton}-left {
     left: 0;
     transform: translate(-100%, -50%);
 
-    .carouser-container:hover & {
+    .#{$CarouserContainer}:hover & {
         transform: translate(0%, -50%);
-    } // ${CarouserContainer}:hover & { transform: translate(0%, -50%); }
-
-    //transform: translate(0%, -50%);
+    }
 }
 
-.carousel-button-right {
+.#{$CarouseButton}-right {
     right: 0;
     transform: translate(100%, -50%);
 
-    .carouser-container:hover & {
+    .#{$CarouserContainer}:hover & {
         transform: translate(0%, -50%);
-    } // ${CarouserContainer}:hover & { transform: translate(0%, -50%); }
-
-    //transform: translate(0%, -50%);
-}
-
-.item {
-    font-size: 2rem;
-    color: white;
-    text-transform: capitalize;
-
-    //   width: ${({ size }) => `${size}rem`};
-    //   height: ${({ size }) => `${size}rem`};
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.carousel-item {
-    margin-left: 1rem;
-    flex: 0 0 auto;
+    }
 }

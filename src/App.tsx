@@ -73,6 +73,8 @@ function getNextElement(list: any) {
     const sibling = list[list.length - 1].nextElementSibling;
 
     if (sibling instanceof HTMLElement) {
+        console.log('next', sibling);
+        
         return sibling;
     }
 
@@ -86,10 +88,15 @@ function usePosition(ref: React.MutableRefObject<HTMLElement | undefined>) {
     React.useEffect(() => {
         const element = ref.current;
 
-        const update = () => {
-            const rect = element!.getBoundingClientRect();
+        if (!element) { return; }
 
-            const visibleElements = Array.from(element!.children).filter((child) => {
+        console.log('------------------------------');
+        
+
+        const update = () => {
+            const rect = element.getBoundingClientRect();
+
+            const visibleElements = Array.from(element.children).filter((child) => {
                 const childRect = child.getBoundingClientRect();
                 return childRect.left >= rect.left && childRect.right <= rect.right;
             });
@@ -102,10 +109,10 @@ function usePosition(ref: React.MutableRefObject<HTMLElement | undefined>) {
 
         update();
 
-        element!.addEventListener("scroll", update, { passive: true });
+        element.addEventListener("scroll", update, { passive: true });
 
         return () => {
-            element!.removeEventListener("scroll", update);
+            element.removeEventListener("scroll", update);
         };
     }, [ref]);
 
@@ -122,13 +129,8 @@ function usePosition(ref: React.MutableRefObject<HTMLElement | undefined>) {
         currentNode.scroll({ left: newScrollPosition, behavior: "smooth" });
     }, [ref]);
 
-    const scrollRight = React.useCallback(
-        () => scrollToElement(nextElement), [scrollToElement, nextElement]
-    );
-
-    const scrollLeft = React.useCallback(
-        () => scrollToElement(prevElement), [scrollToElement, prevElement]
-    );
+    const scrollRight = React.useCallback(() => scrollToElement(nextElement), [nextElement, scrollToElement]);
+    const scrollLeft = React.useCallback(() => scrollToElement(prevElement), [prevElement, scrollToElement]);
 
     return {
         hasItemsOnLeft: prevElement !== null,
