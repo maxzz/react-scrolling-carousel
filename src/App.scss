@@ -50,50 +50,54 @@ h1 {
         display: none;
     }
 
+    .carousel-item & {
+        scroll-snap-align: center;
+    }
     //   ${CarouselItem} & {
     //     scroll-snap-align: center;
     //   }
 }
 
 .carousel-button {
-  position: absolute;
+    position: absolute;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  top: 50%;
-  z-index: 1;
+    top: 50%;
+    z-index: 1;
 
-  transition: transform 0.1s ease-in-out;
+    transition: transform 0.1s ease-in-out;
 
-  background: white;
-  border-radius: 15px;
-  border: none;
-  padding: 0.5rem;
+    background: white;
+    border-radius: 15px;
+    border: none;
+    padding: 0.5rem;
 }
 
 .carousel-button-left {
     left: 0;
     transform: translate(-100%, -50%);
-  
+
+    .carouser-container:hover & {
+        transform: translate(0%, -50%);
+    }
     // ${CarouserContainer}:hover & {
     //   transform: translate(0%, -50%);
     // }
     transform: translate(0%, -50%);
-  
-//    visibility: ${({ hasItemsOnLeft }) => (hasItemsOnLeft ? `all` : `hidden`)};
-  
 }
 
 .carousel-button-right {
     right: 0;
     transform: translate(100%, -50%);
-  
+
+    .carouser-container:hover & {
+        transform: translate(0%, -50%);
+    }
     // ${CarouserContainer}:hover & {
     //   transform: translate(0%, -50%);
     // }
     transform: translate(0%, -50%);
-  
-    //visibility: ${({ hasItemsOnRight }) => (hasItemsOnRight ? `all` : `hidden`)};
 }
 
 .item {
@@ -109,7 +113,7 @@ h1 {
     justify-content: center;
 }
 
-.carouse-item {
+.carousel-item {
   flex: 0 0 auto;
 
   margin-left: 1rem;

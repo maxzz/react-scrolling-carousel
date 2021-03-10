@@ -150,10 +150,7 @@ function usePosition(ref: React.MutableRefObject<HTMLElement | undefined>) {
 
 function CarouselButton(props: any) {
     const { children, hasItemsOnSide, onClick, className } = props;
-
-    //visibility: ${({ hasItemsOnLeft }) => (hasItemsOnLeft ? `all` : `hidden`)};
-
-    let classNames = "carousel-button" + className;
+    let classNames = "carousel-button " + className;
     return (
         <div
             className={classNames}
@@ -271,7 +268,7 @@ function Carousel({ children }: { children: any }) {
         >
             <div className="carouser-container-inner" ref={ref as any}>
                 {React.Children.map(children, (child, index) => (
-                    <div className="carouse-item" key={index}>
+                    <div className="carousel-item" key={index}>
                         {child}
                     </div>
                 ))}
