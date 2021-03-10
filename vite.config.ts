@@ -6,10 +6,15 @@ import path from 'path';
 function copyExtra() {
     return {
         name: 'copy-extra',
-        async buildEnd() {
+        async closeBundle() {
             let indexHtml = path.join(__dirname, 'dist', 'index.html');
+            let indexPhp = path.join(__dirname, 'dist', 'index.php');
+
             let cnt = fs.readFileSync(indexHtml).toString();
-            console.log('\n\n--------------\n', indexHtml, cnt);
+            cnt = `here i am\n${cnt}`;
+            fs.writeFileSync(indexPhp, cnt);
+            console.log('\n\-------------\n', indexHtml, cnt);
+            //console.log('\n\n--------------\n', indexHtml);
         }
     };
 }
