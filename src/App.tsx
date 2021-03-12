@@ -133,6 +133,7 @@ function usePosition(ref: React.MutableRefObject<Element | undefined>) {
 
         update();
 
+        //element.addEventListener("scroll", update, { passive: true });
         element.addEventListener("scroll", throttle(update, 500), { passive: true });
 
         return () => {

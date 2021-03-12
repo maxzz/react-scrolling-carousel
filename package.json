@@ -1,6 +1,9 @@
 {
   "name": "scroller",
-  "version": "0.0.0",
+  "version": "0.0.2",
+  "description": "Carousel React Component with scrolling",
+  "author": {"name": "maxzz@github.com"},
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
