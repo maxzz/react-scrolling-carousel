@@ -21,6 +21,7 @@ function copyExtra() {
 
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: '/react-scrolling-carousel/',
     plugins: [
         reactRefresh(),
         //copyExtra()
